@@ -1,0 +1,30 @@
+{% load static %}
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#123347">
+  <meta name="description" content="Texnikumga onlayn ariza yuborish sahifasi">
+  <title>{% block title %}Texnikum qabuli{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Asosiy qismga o'tish</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="{% url 'apply' %}" class="brand" aria-label="Texnikum qabuli - bosh sahifa">
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <span class="brand-text">TEXNIKUM <small>QABUL PORTALI</small></span>
+      </a>
+      <nav aria-label="Asosiy navigatsiya">
+        <a class="top-link" href="{% url 'privacy' %}">Maxfiylik</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="footer">
+    <div class="container footer-inner"><span>Texnikum qabul portali</span><a href="{% url 'privacy' %}">Ma'lumotlar maxfiyligi</a></div>
+  </footer>
+</body>
+</html>

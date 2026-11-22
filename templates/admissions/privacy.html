@@ -1,0 +1,12 @@
+{% extends 'admissions/base.html' %}
+{% block title %}Maxfiylik - Texnikum qabuli{% endblock %}
+{% block content %}
+<section class="message-page privacy-page"><div class="message-card">
+  <span class="form-kicker">SHAXSIY MA'LUMOTLAR</span>
+  <h1>Maxfiylik haqida</h1>
+  <p>Ariza formasida F.I.Sh., JSHSHIR, telefon, email, tug'ilgan sana, manzil va tanlangan yo'nalish so'raladi. Ma'lumotlar arizani qabul qilish va ko'rib chiqish maqsadida yig'iladi.</p>
+  <p>Arizalar bilan faqat tegishli huquqlarga ega qabul xodimlari ishlashi ko'zda tutilgan. Hujjatlar uchun alohida himoyalangan saqlash tizimi talab etiladi.</p>
+  <p class="notice"><strong>Ma'muriyat uchun:</strong> Bu vaqtinchalik matn. Ommaviy qabuldan oldin texnikumning to'liq nomi, ma'lumotlar operatori, aloqa manzili, saqlash muddati, ma'lumot subyekti huquqlari va amaldagi qonunchilikka mos rasmiy maxfiylik siyosati kiritilishi shart.</p>
+  <a href="{% url 'apply' %}" class="back-button">Arizaga qaytish</a>
+</div></section>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admissions/base.html' %}
+{% block title %}Ariza qabul qilindi - Texnikum qabuli{% endblock %}
+{% block content %}
+<section class="message-page"><div class="message-card">
+  <div class="message-icon" aria-hidden="true">&#10003;</div>
+  <span class="form-kicker">ARIZA HOLATI</span>
+  {% if application_id %}
+    <h1>Arizangiz qabul qilindi!</h1>
+    <p>Ma'lumotlaringiz saqlandi. Qabul komissiyasi ularni tekshiradi.</p>
+    <div class="receipt"><span>Ariza raqami</span><strong>{{ application_id }}</strong></div>
+    <p class="subtle">Raqamni saqlab qo'ying. Bu raqamning o'zi maxfiy ariza ma'lumotlarini ochmaydi.</p>
+  {% else %}
+    <h1>Ariza sahifasi</h1><p>Yangi ariza yuborish uchun boshlang'ich sahifaga qayting.</p>
+  {% endif %}
+  <a href="{% url 'apply' %}" class="back-button">Bosh sahifaga qaytish</a>
+</div></section>
+{% endblock %}

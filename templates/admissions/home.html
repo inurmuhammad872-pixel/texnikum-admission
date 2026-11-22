@@ -1,0 +1,59 @@
+{% extends 'admissions/base.html' %}
+{% block title %}Onlayn ariza - Texnikum qabuli{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> ONLAYN QABUL</span>
+      <h1>Kelajagingizga <em>birinchi qadamni</em> qo'ying.</h1>
+      <p>Texnikumga o'qishga kirish uchun arizangizni onlayn yuboring. Ma'lumotlarni to'ldiring, yo'nalishni tanlang va arizani tasdiqlang.</p>
+      <div class="hero-points">
+        <div><span class="point-icon">01</span><span>Ma'lumotlarni kiriting</span></div>
+        <div><span class="point-icon">02</span><span>Yo'nalishni tanlang</span></div>
+        <div><span class="point-icon">03</span><span>Arizani yuboring</span></div>
+      </div>
+      <div class="hero-note">Ariza yuborish bepul. Ma'lumotlaringizni xatosiz kiriting.</div>
+    </div>
+    <div class="form-shell" id="ariza">
+      <div class="form-header">
+        <span class="form-kicker">QABUL ANKETASI</span>
+        <h2>Ariza topshirish</h2>
+        <p>Barcha maydonlarni to'ldiring. <span class="required">*</span> - majburiy maydonlar.</p>
+      </div>
+      {% if not admissions_open %}
+        <div class="notice" role="status">Qabul hozircha ochilmagan. Rasmiy e'lonni kuting.</div>
+      {% endif %}
+      {% if directions_count == 0 %}
+        <div class="notice" role="status">Hozircha qabul yo'nalishlari kiritilmagan. Ma'muriyat yo'nalishlarni qo'shgandan keyin ariza yuborish mumkin bo'ladi.</div>
+      {% endif %}
+      <form action="{% url 'apply' %}#ariza" method="post" class="application-form">
+        {% csrf_token %}
+        {% if form.non_field_errors %}<div class="notice notice-error" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+        <div class="field-grid">
+          {% for field in form.visible_fields %}
+          {% if field.name != 'consent' %}
+            <div class="field {% if field.name == 'address' %}field-wide{% endif %}">
+              <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %} <span class="required">*</span>{% endif %}</label>
+              {{ field }}
+              {% if field.help_text %}<div class="field-help">{{ field.help_text }}</div>{% endif %}
+              {% for error in field.errors %}<div class="field-error" role="alert">{{ error }}</div>{% endfor %}
+            </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {{ form.website }}
+        <div class="consent-wrap">
+          {{ form.consent }}
+          <label for="{{ form.consent.id_for_label }}">Men <a href="{% url 'privacy' %}" target="_blank" rel="noopener">maxfiylik shartlari</a> bilan tanishdim va shaxsiy ma'lumotlarimni arizani ko'rib chiqish uchun qayta ishlashga roziman.</label>
+        </div>
+        {% for error in form.consent.errors %}<div class="field-error" role="alert">{{ error }}</div>{% endfor %}
+        <button class="submit-button" type="submit" {% if directions_count == 0 or not admissions_open %}disabled{% endif %}>Arizani yuborish <span aria-hidden="true">&rarr;</span></button>
+        <p class="form-disclaimer">Ariza yuborilgach, ma'lumotlar qabul komissiyasi tomonidan ko'rib chiqiladi.</p>
+      </form>
+    </div>
+  </div>
+</section>
+<section class="info-strip">
+  <div class="container info-inner"><span class="info-badge">!</span><p>Ariza yuborishdan oldin JSHSHIR, telefon raqami va tanlangan yo'nalishni yana bir bor tekshiring.</p></div>
+</section>
+{% endblock %}
