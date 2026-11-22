@@ -45,26 +45,31 @@ application flows, responsive frontend presence, Railway readiness.
 
 ## Verified vs not verified
 
-Verified:
-- All generated Python files compile via Python's AST parser
-- railway.json parses as JSON
-- Chrome mobile/desktop prototype checked at widths 320, 375, 390, 768, 1024, 1366 px;
-  no horizontal overflow in prototype at any of these widths
-- Form button at least 50 px tall in tested layouts
+Verified on GitHub Actions (2026-11-22):
+- Dependency installation and pip check
+- `python manage.py check`
+- `python manage.py makemigrations --check --dry-run`
+- `python manage.py collectstatic --noinput`
+- Nine automated Django API/form/security tests
+- Python AST/compileall validation in the development environment
+- Static Chrome prototype checked for horizontal overflow at 320, 375, 390, 768, 1024 and 1366 px
 
 Not verified:
-- Full Django `manage.py check`, migrations, API and web flow integration tests
-  (required Django packages unavailable in this execution environment)
-- Actual production Railway deployment: upstream GitHub connection is read-only
-- Real phone hardware/browser behavior and actual database persistence
-- Private uploads, backup/restore, penetration testing and legal compliance
+- Live Railway deployment (Railway free-plan resource limit blocks project creation)
+- Real device and hardware-browser behavior
+- Production PostgreSQL and private document backup/restore
+- Load tests, independent security testing and institutional/legal approval
+
+The public form and API are CLOSED by default in production (ADMISSIONS_OPEN=0).
 
 ## Release gate
 
-DO NOT open public admissions while the privacy notice is still a placeholder,
-or without a properly configured Postgres database, admin account, actual study
-directions, tested backups, anti-bot controls and a complete live-flow test.
+Do not open public admissions until the institution approves the privacy policy,
+actual school name/directions/contact details, PostgreSQL setup, staff workflow,
+backup/restore and anti-abuse controls. The repository originally committed an
+SQLite database and a hardcoded Django secret key; removing the SQLite file from
+the current branch does NOT remove old Git history. Review potential disclosure
+and rotate any production credentials before live use.
 
-GitHub access: connected account can read, but not push to source repository.
-For next step, authorize write access to the current connected GitHub account,
-or commit this package to a writable repository and connect that repo to Railway.
+GitHub: security changes have been committed to audit/secure-admissions-20261122.
+Railway: creation attempted, blocked by free plan resource provisioning limit.
